@@ -1,0 +1,338 @@
+/* Componentes compartilhados entre páginas (estilo shadcn/ui) */
+
+/* ---------- Página ---------- */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---------- Barra utilitária: onde estou (esq.) · quem sou e meu acesso (dir.) ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-fg-subtle);
+}
+.breadcrumb svg { width: 15px; height: 15px; }
+.breadcrumb__link,
+.breadcrumb__current { display: inline-flex; align-items: center; gap: 8px; }
+.breadcrumb__link { transition: color var(--transition); }
+.breadcrumb__link:hover { color: var(--color-navy); }
+.breadcrumb__current { color: var(--color-navy); }
+.breadcrumb .breadcrumb__sep { width: 14px; height: 14px; color: #b4b9c3; }
+
+/* ---------- Cabeçalho da página: contexto → título → apoio ---------- */
+.page-header {
+  margin-bottom: 32px;
+  animation: fade-up 500ms var(--ease-out) both;
+}
+
+.page-header__eyebrow {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  font-variant-numeric: lining-nums;
+  color: var(--color-petrol);
+}
+
+.page-header__title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-navy);
+}
+
+.page-header__subtitle {
+  margin: 8px 0 0;
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--color-fg-subtle);
+}
+
+/* ---------- Badge ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-fg-subtle);
+  white-space: nowrap;
+}
+.badge svg { width: 12px; height: 12px; }
+
+/* ---------- Menu do usuário ---------- */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 12px 0 5px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  transition: border-color var(--transition);
+}
+.user-menu:hover { border-color: var(--color-border-strong); }
+.user-menu:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+
+.user-menu__avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-navy);
+}
+.user-menu__text { display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
+.user-menu__name { font-size: 13.5px; font-weight: 600; color: var(--color-navy); }
+.user-menu__login { font-size: 11.5px; font-weight: 500; color: var(--color-fg-subtle); }
+.user-menu__chevron { width: 16px; height: 16px; color: var(--color-fg-subtle); transition: transform 260ms var(--ease-spring); }
+.user-menu:hover .user-menu__chevron { transform: translateY(2px); }
+
+/* ---------- Flip 3D do ícone ----------
+   Gira quando o elemento "host" (classe .flip-host) recebe hover/foco, ou quando
+   o host ganha .is-flipped (ex.: arquivo sendo arrastado sobre a área de upload).
+   O ângulo (--flip) é uma propriedade registrada, então o navegador interpola o
+   próprio ângulo. Vantagens: se o mouse sair no meio do giro, ele volta do ponto
+   exato em que estava; e escala/sombra derivam do ângulo via sin(), ficando
+   sempre sincronizadas com o giro. */
+@property --flip   { syntax: "<angle>"; inherits: true;  initial-value: 0deg; }
+@property --tilt-x { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --tilt-y { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+.icon-flip {
+  --icon-flip-size: 48px;
+  display: block;
+  flex-shrink: 0;
+  width: var(--icon-flip-size);
+  height: var(--icon-flip-size);
+  perspective: calc(var(--icon-flip-size) * 7.5);
+}
+.icon-flip--lg { --icon-flip-size: 60px; }
+
+.icon-flip__inner {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* Afunda até 12% no meio do giro (90°) e volta — dá peso ao ícone */
+  transform:
+    scale(calc(1 - .12 * sin(var(--flip))))
+    rotateX(var(--tilt-x))
+    rotateY(calc(var(--flip) + var(--tilt-y)));
+  transition:
+    --flip 750ms var(--ease-in-out),
+    --tilt-x 450ms var(--ease-out),
+    --tilt-y 450ms var(--ease-out);
+}
+.flip-host:is(:hover, :focus-visible, :has(:focus-visible), .is-flipped) .icon-flip__inner { --flip: 180deg; }
+
+.icon-flip__face {
+  grid-area: 1 / 1;
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: calc(var(--icon-flip-size) * .21);
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.icon-flip__face svg { width: 46%; height: 46%; }
+
+.icon-flip__face--front {
+  color: var(--color-petrol);
+  background: #e6f8f6; /* teal a 10% sobre branco, opaco para não vazar o verso */
+}
+.icon-flip__face--back {
+  color: #fff;
+  background: var(--color-navy);
+  transform: rotateY(180deg);
+}
+
+/* Sombreamento: a face escurece ao ficar de lado, como sob uma luz real */
+.icon-flip__face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0a1433;
+  opacity: calc(sin(var(--flip)) * .25);
+  pointer-events: none;
+}
+
+/* O giro já é a animação: os ícones de dentro ficam parados */
+.icon-flip svg.lucide,
+.icon-flip svg.lucide * { animation: none !important; transition: none !important; transform: none !important; }
+
+/* ---------- Botões ---------- */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 20px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-navy);
+  background: var(--color-surface);
+  transition: border-color 250ms var(--ease-out), background 250ms var(--ease-out), color 250ms var(--ease-out);
+}
+.pill-btn svg { width: 16px; height: 16px; transition: transform 300ms var(--ease-spring); }
+.pill-btn:hover svg { transform: translateX(3px); }
+
+.pill-btn--light {
+  border-color: transparent;
+  background: #fff;
+}
+.pill-btn--light:hover { background: rgba(255, 255, 255, .88); }
+.pill-btn--light:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* Primário: ação principal da página */
+.pill-btn--primary {
+  border-color: var(--color-navy);
+  color: #fff;
+  background: var(--color-navy);
+}
+.pill-btn--primary:hover:not(:disabled) { background: #1a2a63; }
+.pill-btn--primary:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+.pill-btn:disabled {
+  cursor: not-allowed;
+  border-color: var(--color-border);
+  color: #a3a8b3;
+  background: #f1f2f4;
+}
+.pill-btn:disabled svg { transform: none; }
+
+/* Botão só com ícone (ex.: remover) */
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  color: var(--color-fg-subtle);
+  transition: background var(--transition), color var(--transition);
+}
+.icon-btn:hover { background: var(--color-hover); color: var(--color-navy); }
+.icon-btn:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 1px; }
+.icon-btn svg { width: 16px; height: 16px; }
+
+/* ---------- Card (painel) ---------- */
+.panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  animation: fade-in 450ms var(--ease-out) 60ms both;
+}
+.panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+.panel__title { margin: 0; font-size: 16px; font-weight: 700; color: var(--color-navy); }
+.panel__body { padding: 24px; }
+.panel__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px 24px;
+  border-top: 1px solid var(--color-border);
+  background: #fbfcfd;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Variante do badge com destaque da marca */
+.badge--accent {
+  border-color: rgba(0, 184, 169, .3);
+  color: var(--color-petrol);
+  background: #e6f8f6;
+}
+.badge { transition: background var(--transition), color var(--transition), border-color var(--transition); }
+
+/* ---------- Switch (estilo shadcn) ---------- */
+.switch-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  cursor: pointer;
+}
+.switch-field input { position: absolute; opacity: 0; pointer-events: none; }
+.switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 40px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 999px;
+  background: var(--color-border-strong);
+  transition: background 250ms var(--ease-out);
+}
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 29, 75, .2);
+  transition: transform 300ms var(--ease-spring);
+}
+.switch-field input:checked + .switch { background: var(--color-petrol); }
+.switch-field input:checked + .switch::after { transform: translateX(18px); }
+.switch-field input:focus-visible + .switch { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+.switch-field__text { display: flex; flex-direction: column; gap: 2px; }
+.switch-field__label { font-size: 14px; font-weight: 600; color: var(--color-navy); }
+.switch-field__hint { font-size: 13px; font-weight: 500; color: var(--color-fg-subtle); }
+
+/* ---------- Animações de entrada ---------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header, .panel { animation: none; }
+  .icon-flip__inner { transition: none; }
+}

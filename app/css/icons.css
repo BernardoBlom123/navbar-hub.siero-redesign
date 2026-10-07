@@ -1,0 +1,149 @@
+/* Micro-animações dos ícones (Lucide) no hover — uma por ícone, no espírito do lucide-animated.
+   O Lucide copia o data-lucide para o <svg>, então cada ícone é alvo de svg[data-lucide="nome"].
+   As animações disparam no hover e no foco via teclado do item inteiro, não só do ícone. */
+
+svg.lucide { overflow: visible; }
+svg.lucide * { transform-box: fill-box; transform-origin: center; }
+
+/* Cor: sub-ícones ganham o tom da marca no hover */
+.nav__subitem:hover:not(.is-active) .nav__icon { color: var(--color-petrol); }
+
+/* ---------- Home: blocos pulsam em sequência ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="layout-grid"] rect {
+  animation: icon-pop var(--icon-duration) var(--ease-spring);
+}
+svg[data-lucide="layout-grid"] rect:nth-child(2) { animation-delay: 60ms !important; }
+svg[data-lucide="layout-grid"] rect:nth-child(3) { animation-delay: 120ms !important; }
+svg[data-lucide="layout-grid"] rect:nth-child(4) { animation-delay: 180ms !important; }
+
+/* ---------- Upload: a seta sobe ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="upload"] :is(polyline, line) {
+  animation: icon-rise var(--icon-duration) var(--ease-out);
+}
+
+/* ---------- Compliance: o check é desenhado ---------- */
+svg[data-lucide="shield-check"] path:last-child { stroke-dasharray: 12; stroke-dashoffset: 0; }
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="shield-check"] path:last-child {
+  animation: icon-draw 500ms var(--ease-out);
+}
+
+/* ---------- Auditoria: foco do scanner ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="scan-eye"] {
+  animation: icon-focus var(--icon-duration) var(--ease-spring);
+}
+
+/* ---------- Catálogo de Rubricas: etiquetas balançam ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="tags"] {
+  animation: icon-wiggle 600ms var(--ease-out);
+}
+
+/* ---------- Conferência DIRF: elos se conectam ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="link-2"] {
+  animation: icon-connect var(--icon-duration) var(--ease-spring);
+}
+
+/* ---------- Cotas Legais: aceno ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="accessibility"] {
+  animation: icon-wave 650ms var(--ease-out);
+}
+
+/* ---------- Administração de PJs: maleta levanta ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="briefcase-business"] {
+  animation: icon-lift var(--icon-duration) var(--ease-spring);
+}
+
+/* ---------- Painel de PJs: fatia se destaca (fica enquanto o hover durar) ---------- */
+svg[data-lucide="chart-pie"] path:first-child { transition: transform 300ms var(--ease-spring); }
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="chart-pie"] path:first-child {
+  transform: translate(1.5px, -1.5px);
+}
+
+/* ---------- Prestadores: cartão inclina ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="contact"] {
+  animation: icon-tilt var(--icon-duration) var(--ease-spring);
+}
+
+/* ---------- Lembretes: sino toca ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="bell"] {
+  transform-origin: 50% 8%;
+  animation: icon-ring 700ms var(--ease-out);
+}
+
+/* ---------- Gestão de Autônomos: crachá vira ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="id-card"] {
+  animation: icon-flip 650ms var(--ease-out);
+}
+
+/* ---------- Autônomos: cabeça acena ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="user-round"] circle {
+  animation: icon-nod var(--icon-duration) var(--ease-spring);
+}
+
+/* ---------- RPAs do mês: recibo sendo impresso ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="receipt-text"] {
+  animation: icon-print var(--icon-duration) var(--ease-out);
+}
+
+/* ---------- Importações: seta entra no arquivo ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="file-input"] path:nth-child(n+3) {
+  animation: icon-push var(--icon-duration) var(--ease-spring);
+}
+
+/* ---------- Envio ao eSocial: avião decola e volta ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="send"] {
+  animation: icon-fly 650ms var(--ease-out);
+}
+
+/* ---------- Envios ao eSocial: ponteiro volta no tempo ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="history"] {
+  animation: icon-rewind 700ms var(--ease-out);
+}
+
+/* ---------- Visão Financeira: barras crescem ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="chart-no-axes-combined"] {
+  transform-origin: 50% 100%;
+  animation: icon-grow var(--icon-duration) var(--ease-spring);
+}
+
+/* ---------- Apoio: boia gira (fica enquanto o hover durar) ---------- */
+svg[data-lucide="life-buoy"] { transition: transform 600ms var(--ease-spring); }
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="life-buoy"] { transform: rotate(180deg); }
+
+/* ---------- Biblioteca CCT: livro se abre ---------- */
+:is(.nav__item, .nav__subitem, .feature-card):is(:hover, :focus-visible) svg[data-lucide="book-open-text"] {
+  animation: icon-open var(--icon-duration) var(--ease-spring);
+}
+
+/* ---------- Toggle da sidebar e menu do usuário ---------- */
+.sidebar__toggle:hover svg[data-lucide="panel-left-close"] { animation: icon-nudge-left 500ms var(--ease-spring); }
+.sidebar__toggle:hover svg[data-lucide="panel-left-open"] { animation: icon-nudge-right 500ms var(--ease-spring); }
+.user:hover .user__chevron { animation: icon-squeeze 450ms var(--ease-spring); }
+
+/* ---------- Keyframes ---------- */
+@keyframes icon-pop      { 50% { transform: scale(.65); } }
+@keyframes icon-rise     { 40% { transform: translateY(-3px); } 70% { transform: translateY(.5px); } }
+@keyframes icon-draw     { from { stroke-dashoffset: 12; } to { stroke-dashoffset: 0; } }
+@keyframes icon-focus    { 35% { transform: scale(.82); } 70% { transform: scale(1.1); } }
+@keyframes icon-wiggle   { 20% { transform: rotate(-14deg); } 45% { transform: rotate(10deg); } 70% { transform: rotate(-5deg); } }
+@keyframes icon-connect  { 40% { transform: scaleX(.78); } 75% { transform: scaleX(1.08); } }
+@keyframes icon-wave     { 25% { transform: rotate(-12deg) translateY(-1px); } 55% { transform: rotate(10deg); } 80% { transform: rotate(-4deg); } }
+@keyframes icon-lift     { 45% { transform: translateY(-3px) rotate(-4deg); } }
+@keyframes icon-tilt     { 45% { transform: rotate(-10deg) scale(1.06); } }
+@keyframes icon-ring     { 15% { transform: rotate(16deg); } 35% { transform: rotate(-14deg); } 55% { transform: rotate(9deg); } 75% { transform: rotate(-4deg); } }
+@keyframes icon-flip     { to { transform: rotateY(360deg); } }
+@keyframes icon-nod      { 40% { transform: translateY(-2px); } 70% { transform: translateY(.5px); } }
+@keyframes icon-print    { 30% { transform: translateY(-2.5px); } 60% { transform: translateY(1px); } }
+@keyframes icon-push     { 45% { transform: translateX(3px); } }
+@keyframes icon-fly      { 40% { transform: translate(8px, -8px); opacity: 0; } 41% { transform: translate(-8px, 8px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes icon-rewind   { to { transform: rotate(-360deg); } }
+@keyframes icon-grow     { 35% { transform: scaleY(.6); } 70% { transform: scaleY(1.12); } }
+@keyframes icon-nudge-left  { 45% { transform: translateX(-3px); } }
+@keyframes icon-nudge-right { 45% { transform: translateX(3px); } }
+@keyframes icon-squeeze  { 45% { transform: scaleY(1.25); } }
+@keyframes icon-open     { 40% { transform: scaleX(.7); } 75% { transform: scaleX(1.08); } }
+
+/* Acessibilidade: respeita quem pediu menos movimento no sistema */
+@media (prefers-reduced-motion: reduce) {
+  svg.lucide,
+  svg.lucide * { animation: none !important; transition: none !important; }
+}

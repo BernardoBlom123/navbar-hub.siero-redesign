@@ -1,0 +1,160 @@
+/* ---------- Upload e-Social ---------- */
+
+/* Área de soltar arquivos */
+.dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 44px 24px 40px;
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: #fbfcfd;
+  cursor: pointer;
+  transition: border-color 250ms var(--ease-out), background 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
+}
+.dropzone:hover { border-color: rgba(11, 74, 110, .45); background: #f8fbfb; }
+.dropzone:has(:focus-visible) { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+
+/* Arquivo sendo arrastado por cima: a área "recebe" */
+.dropzone.is-dragover {
+  border-style: solid;
+  border-color: var(--color-teal);
+  background: #f0fbf9;
+  box-shadow: inset 0 0 0 3px rgba(0, 184, 169, .12);
+}
+
+.dropzone.is-disabled { cursor: not-allowed; opacity: .55; }
+.dropzone.is-disabled .icon-flip__inner { --flip: 0deg !important; }
+
+.dropzone .icon-flip { margin-bottom: 18px; }
+
+.dropzone__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+.dropzone__text {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-fg-subtle);
+}
+.dropzone__link {
+  color: var(--color-petrol);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(11, 74, 110, .3);
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--transition);
+}
+.dropzone:hover .dropzone__link { text-decoration-color: currentColor; }
+
+.dropzone__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 18px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 9px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-fg-subtle);
+}
+
+/* Lista de arquivos */
+.file-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.file-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 12px 14px 16px;
+  background: var(--color-surface);
+}
+.file-row + .file-row { border-top: 1px solid var(--color-border); }
+.file-row.is-new { animation: row-in 400ms var(--ease-out) both; }
+
+.file-row__icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  color: var(--color-petrol);
+  background: #e6f8f6;
+}
+.file-row__icon svg { width: 18px; height: 18px; }
+
+.file-row__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.file-row__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-navy);
+  overflow-wrap: anywhere; /* nomes longos quebram em vez de serem cortados */
+}
+.file-row__meta {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--color-fg-subtle);
+}
+
+/* Estados */
+.file-row--invalid { background: #fffafa; }
+.file-row--invalid .file-row__icon { color: #c2410c; background: #fdeee6; }
+.file-row--invalid .file-row__meta { color: #c2410c; }
+
+.file-row--done .file-row__icon { color: #fff; background: var(--color-petrol); }
+.file-row--done .file-row__meta { color: var(--color-petrol); }
+
+/* Barra de progresso */
+.progress {
+  height: 4px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+.progress__bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-petrol);
+}
+.file-row--done .progress__bar { background: var(--color-teal); }
+
+/* Ícone girando (carregando) */
+.spin { animation: spin 900ms linear infinite; }
+
+@keyframes row-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .file-row.is-new { animation: none; }
+}

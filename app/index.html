@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hubsiero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/icons.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/upload.css" />
+  <!-- Lucide: biblioteca de ícones padrão do shadcn/ui -->
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+      <header class="sidebar__header">
+        <a href="#/home" class="logo" aria-label="Hubsiero — início">
+          <img src="assets/logo-hubsiero.svg" alt="Hubsiero" width="108" height="19" />
+        </a>
+        <button class="sidebar__toggle" id="sidebarToggle" aria-label="Recolher menu" title="Recolher menu">
+          <i data-lucide="panel-left-close"></i>
+        </button>
+      </header>
+
+      <nav class="nav">
+        <a class="nav__item nav__item--primary" href="#/home" data-route="home">
+          <i class="nav__icon" data-lucide="layout-grid"></i>
+          <span class="nav__label">Home</span>
+        </a>
+
+        <hr class="nav__divider" />
+
+        <a class="nav__item" href="#/upload-esocial" data-route="upload-esocial">
+          <i class="nav__icon" data-lucide="upload"></i>
+          <span class="nav__label">Upload e-Social</span>
+        </a>
+
+        <hr class="nav__divider" />
+
+        <div class="nav__group is-open">
+          <button class="nav__item nav__group-toggle" aria-expanded="true">
+            <i class="nav__icon" data-lucide="shield-check"></i>
+            <span class="nav__label">Compliance</span>
+            <i class="nav__chevron" data-lucide="chevron-down"></i>
+          </button>
+          <div class="nav__sub">
+            <a class="nav__subitem" href="#/auditoria" data-route="auditoria"><i class="nav__icon" data-lucide="scan-eye"></i><span class="nav__label">Auditoria</span></a>
+            <a class="nav__subitem" href="#/catalogo-rubricas" data-route="catalogo-rubricas"><i class="nav__icon" data-lucide="tags"></i><span class="nav__label">Catálogo de Rubricas</span></a>
+            <a class="nav__subitem" href="#/conferencia-dirf" data-route="conferencia-dirf"><i class="nav__icon" data-lucide="link-2"></i><span class="nav__label">Conferência DIRF</span></a>
+            <a class="nav__subitem" href="#/cotas-legais" data-route="cotas-legais"><i class="nav__icon" data-lucide="accessibility"></i><span class="nav__label">Cotas Legais</span></a>
+          </div>
+        </div>
+
+        <hr class="nav__divider" />
+
+        <div class="nav__group is-open">
+          <button class="nav__item nav__group-toggle" aria-expanded="true">
+            <i class="nav__icon" data-lucide="briefcase-business"></i>
+            <span class="nav__label">Administração de PJs</span>
+            <i class="nav__chevron" data-lucide="chevron-down"></i>
+          </button>
+          <div class="nav__sub">
+            <a class="nav__subitem" href="#/painel-pjs" data-route="painel-pjs"><i class="nav__icon" data-lucide="chart-pie"></i><span class="nav__label">Painel de PJs</span></a>
+            <a class="nav__subitem" href="#/prestadores" data-route="prestadores"><i class="nav__icon" data-lucide="contact"></i><span class="nav__label">Prestadores</span></a>
+            <a class="nav__subitem" href="#/lembretes" data-route="lembretes"><i class="nav__icon" data-lucide="bell"></i><span class="nav__label">Lembretes</span></a>
+          </div>
+        </div>
+
+        <hr class="nav__divider" />
+
+        <div class="nav__group is-open">
+          <button class="nav__item nav__group-toggle" aria-expanded="true">
+            <i class="nav__icon" data-lucide="id-card"></i>
+            <span class="nav__label">Gestão de Autônomos</span>
+            <i class="nav__chevron" data-lucide="chevron-down"></i>
+          </button>
+          <div class="nav__sub">
+            <a class="nav__subitem" href="#/autonomos" data-route="autonomos"><i class="nav__icon" data-lucide="user-round"></i><span class="nav__label">Autônomos</span></a>
+            <a class="nav__subitem" href="#/rpas-mes" data-route="rpas-mes"><i class="nav__icon" data-lucide="receipt-text"></i><span class="nav__label">RPAs do mês</span></a>
+            <a class="nav__subitem" href="#/importacoes" data-route="importacoes"><i class="nav__icon" data-lucide="file-input"></i><span class="nav__label">Importações</span></a>
+            <a class="nav__subitem" href="#/envio-esocial" data-route="envio-esocial"><i class="nav__icon" data-lucide="send"></i><span class="nav__label">Envio ao eSocial</span></a>
+            <a class="nav__subitem" href="#/envios-esocial" data-route="envios-esocial"><i class="nav__icon" data-lucide="history"></i><span class="nav__label">Envios ao eSocial</span></a>
+          </div>
+        </div>
+
+        <hr class="nav__divider" />
+
+        <a class="nav__item" href="#/visao-financeira" data-route="visao-financeira">
+          <i class="nav__icon" data-lucide="chart-no-axes-combined"></i>
+          <span class="nav__label">Visão Financeira</span>
+        </a>
+
+        <hr class="nav__divider" />
+
+        <a class="nav__item" href="#/apoio" data-route="apoio">
+          <i class="nav__icon" data-lucide="life-buoy"></i>
+          <span class="nav__label">Apoio</span>
+        </a>
+      </nav>
+
+      <footer class="sidebar__footer">
+        <button class="user" aria-haspopup="menu">
+          <span class="user__avatar" aria-hidden="true">BB</span>
+          <span class="user__name">Bernardo Blom</span>
+          <i class="user__chevron" data-lucide="chevrons-up-down"></i>
+        </button>
+      </footer>
+    </aside>
+
+    <main class="content" id="content">
+      <!-- Área de conteúdo: placeholder das seções -->
+    </main>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script src="js/pages/upload-esocial.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

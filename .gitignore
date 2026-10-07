@@ -1,0 +1,11 @@
+# Dependências (caso o projeto ganhe ferramentas de build no futuro)
+node_modules/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
